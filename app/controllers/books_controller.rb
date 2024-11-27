@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   # 新規作成
   def new
-    @books = Book.new
+    @book = Book.new
   end
 
   # データの保存
@@ -32,6 +32,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:name, :image, :caption)
+    params.require(:book).permit(:title, :body)
   end
 end

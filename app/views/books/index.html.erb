@@ -5,29 +5,26 @@
 </head>
 <body>
 
+<!-- 一覧画面 -->
 <h1>Books</h1>
 <table>
     <thead>
         <tr>
             <th>Title</th>
-            <th>Body</th>
+            <th>Option</th>
         </tr>
     </thead>
     <tbody>
         <% @books.each do |item| %>
         <tr class="field">
-            <td class="title"><%= item.title %></td>
+            <td class="title"><%= link_to item.title, book_path(item.id) %></td>
             <td class="body"><%= item.body %></td>
-            <td class="link">
-                <span class="link"><%= link_to "Show", book_path(item.id) %></span>
-                <span class="link"><%= link_to "Edit", edit_book_path(item.id) %></span>
-                <span class="link"><%= link_to "Destroy", book_path(item.id), method: :delete, data: { confirm: "Are you sure?", turbolinks: false } %></span>
-            </td>
         </tr>
         <% end %>
     </tbody>
 </table>
 
+<!-- 作成画面 -->
 <h2>New Book</h2>
 
 <!-- インスタンス変数@bookを使用するのは、エラーメッセージを表示するため -->
