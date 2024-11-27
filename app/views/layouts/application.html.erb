@@ -12,10 +12,17 @@
   </head>
 
   <header>
-      Home ⇒ログインしてる人の一覧ページにリンク
+      <li class="nav-item">
+        <%= link_to 'Bookers', root_path %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Home', user_path(current_user) %>
+      </li>
 
       <% if user_signed_in? %>
-        Users⇒URLはラストがusers（色んな人の投稿一覧）
+        <li class="nav-item">
+          <%= link_to 'Users', users_path %>
+        </li>
         <li>
           <%= link_to "Books", books_path %>
         </li>
@@ -23,7 +30,9 @@
           <%= link_to "Log out", destroy_user_session_path, method: :delete %>
         </li>
       <% else %>
-        About
+        <li class="nav-item">
+          <%= link_to 'About', about_path %>
+        </li>
         <li>
           <%= link_to "Sign up", new_user_registration_path %>
         </li>
