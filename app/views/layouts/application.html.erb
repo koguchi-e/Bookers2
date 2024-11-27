@@ -12,6 +12,7 @@
   </head>
 
   <header>
+      <!-- 共通リンク -->
       <li class="nav-item">
         <%= link_to 'Bookers', root_path %>
       </li>
@@ -19,24 +20,27 @@
         <%= link_to 'Home', user_path(current_user) %>
       </li>
 
+      <!-- ログインしてる人のみリンク -->
       <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to 'Users', users_path %>
         </li>
-        <li>
+        <li class="nav-item">
           <%= link_to "Books", books_path %>
         </li>
-        <li>
+        <li class="nav-item">
           <%= link_to "Log out", destroy_user_session_path, method: :delete %>
         </li>
+
+      <!-- ログインしてない時のリンク -->
       <% else %>
         <li class="nav-item">
           <%= link_to 'About', about_path %>
         </li>
-        <li>
+        <li class="nav-item">
           <%= link_to "Sign up", new_user_registration_path %>
         </li>
-        <li>
+        <li class="nav-item">
           <%= link_to "Log in", new_user_session_path %>
         </li>
       <% end %>
@@ -45,4 +49,10 @@
   <body>
     <%= yield %>
   </body>
+
+  <footer>
+    <div class='footer'>
+      <p>CopyRight Infratop.inc</p>
+    </div>
+  </footer>
 </html>
