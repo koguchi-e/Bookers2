@@ -4,5 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  self.authentication_keys = [:name]
+
   has_many :books, dependent: :destroy
 end

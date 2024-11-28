@@ -8,7 +8,7 @@
 
     <script src="https://kit.fontawesome.com/38dc52f0f7.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', 'data-turbolinks': 'false' %>
   </head>
 
   <header>
@@ -16,12 +16,12 @@
       <li class="nav-item">
         <%= link_to 'Bookers', root_path %>
       </li>
-      <li class="nav-item">
-        <%= link_to 'Home', user_path(current_user) %>
-      </li>
 
       <!-- ログインしてる人のみリンク -->
       <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Home', user_path(current_user) %>
+          </li>
         <li class="nav-item">
           <%= link_to 'Users', users_path %>
         </li>
@@ -35,6 +35,9 @@
       <!-- ログインしてない時のリンク -->
       <% else %>
         <li class="nav-item">
+          <%= link_to 'Home', root_path %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'About', about_path %>
         </li>
         <li class="nav-item">
@@ -47,6 +50,12 @@
   </header>
 
   <body>
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+        <%= message %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 

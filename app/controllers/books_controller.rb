@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!  
+
   # 新規作成
   def new
     @book = Book.new
@@ -6,7 +8,7 @@ class BooksController < ApplicationController
 
   # データの保存
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.new(book_params)
     @books = Book.all
     if @book.save
       flash[:notice] = "Book was successfully created."

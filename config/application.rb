@@ -11,6 +11,9 @@ module Bookers2
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.i18n.default_locale = :en
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -20,3 +23,4 @@ module Bookers2
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+

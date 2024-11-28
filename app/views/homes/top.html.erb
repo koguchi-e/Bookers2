@@ -8,10 +8,11 @@
     about various books!
 </p>
 
-<div class="login"style="margin-top: 5px;">
-    <%= link_to "Log in", new_user_session_path %>
+<div class="login">
+  <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
 </div>
 
-<div class="signup"style="margin-top: 5px;">
-    <%= link_to "Sign up", new_user_registration_path %>
+<div class="signup">
+  <%= link_to "Sign up", new_user_registration_path, class: "btn btn-secondary" %>
 </div>
+
