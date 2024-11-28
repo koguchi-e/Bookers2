@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     root_path 
   end
 
+  # ログイン後ユーザーのダッシュボードなどにリダイレクト
+  def after_sign_in_path_for(resource)
+    user_path(current_user)  
+  end
+
   # ログインしている場合にサインアップページにアクセスできないようにリダイレクトする
   def redirect_if_logged_in
     if user_signed_in? && controller_name == 'registrations' && ['new', 'create'].include?(action_name)

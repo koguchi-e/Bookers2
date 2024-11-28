@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :redirect_if_logged_in, only: [:new, :create]
+  before_action :redirect_if_logged_in, only: [:create]
 
   # GET /users/sign_up
   def new
@@ -10,6 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def redirect_if_logged_in
-    redirect_to user_path(current_user) if user_signed_in?
+    # サインインしていない場合のみサインアップページを表示
+    if user_signed_in?
+      redirect_to user_path(current_user) # ログインしていればトップページにリダイレクト
+    end
   end
 end
