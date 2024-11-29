@@ -21,7 +21,7 @@ class BooksController < ApplicationController
   # 一覧画面表示
   def index
     # すべての本のデータを取得
-    @books = Book.all
+    @books = Book.page(params[:page])
     @book = Book.new
   end
 

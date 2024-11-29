@@ -8,9 +8,11 @@ class UsersController < ApplicationController
   end
   
   # ユーザー詳細
-    def show
-      # ログインユーザーのページを表示する処理
-    end
+  def show
+    # ログインユーザーのページを表示する処理
+    @user = User.find(params[:id])
+    @books = @user.books.page(params[:page])
+  end
 
   # ユーザー編集ページ
   def edit
