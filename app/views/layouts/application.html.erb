@@ -58,7 +58,8 @@
 
     <!-- ユーザー情報 -->
     <!-- ログインしている場合にのみ表示 -->
-    <% if user_signed_in? && @user.present? && (params[:controller] != 'users' || params[:action] != 'edit') %>
+    <!-- ユーザのshow・edit画面は除く -->
+    <% if user_signed_in? && @user.present? && !(params[:controller] == 'users' && ['edit', 'show'].include?(params[:action])) %>
       <div>
         <h3><%= @user.name %></h3>
         <%= image_tag @user.get_profile_image(100,100) %> <!-- ユーザーのプロフィール画像を表示 -->

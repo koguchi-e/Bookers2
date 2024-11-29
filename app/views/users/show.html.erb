@@ -1,3 +1,27 @@
+<!-- ユーザー詳細ページ -->
+<h2>User info</h2>
+
+<!-- ユーザー情報 -->
+<div class="user-info">
+  <!-- ユーザー画像 -->
+  <%= image_tag @user.get_profile_image(100, 100) %> <br>
+
+  <!-- ユーザー名 -->
+  <div>
+    <b>Name <%= @user.name %></b>
+  </div>
+
+  <!-- ユーザーの自己紹介 -->
+  <div>
+    <b>Introduction <%= @user.introduction %></b>
+  </div>
+
+  <!-- ユーザー編集画面へ移動するリンク -->
+  <!-- ユーザ本人のみ表示 -->
+  <% if @user == current_user %>
+    <%= link_to 'Edit User', edit_user_path(@user) %>
+  <% end %>
+</div>
 
 <!-- ユーザーの投稿一覧 -->
 <table>
