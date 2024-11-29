@@ -31,12 +31,15 @@ class BooksController < ApplicationController
     @new_book = Book.new  # 新規作成フォーム用のBookインスタンス
   end
 
+  # 本の編集・更新
   def edit
-    @book = Book.find(params[:id])
-    redirect_to books_path, alert: 'You are not authorized to edit this book.' unless @book.user == current_user
+    puts params[:id]  # params[:id] を確認
+    @book = Book.find(params[:id])  # 本を取得
+    if @book.user != current_user  # ユーザーが一致するかチェック
+      redirect_to books_path, alert: 'You are not authorized to edit this book.'
+    end
   end
 
-  # 本の更新処理
   def update
     @book = Book.find(params[:id])  # 編集対象の本を取得
     if @book.update(book_params)

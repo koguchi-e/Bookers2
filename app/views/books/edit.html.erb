@@ -1,18 +1,19 @@
-<h2>Edit Book</h2>
-
 <%= form_with model: @book, local: true do |f| %>
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title %><br>
+    <% if @book.errors[:title].any? %>
+      <div class="error"><%= @book.errors[:title].join(", ") %></div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :body %><br>
-    <%= f.text_area :body %>
+    <%= f.text_area :body %><br>
+    <% if @book.errors[:body].any? %>
+      <div class="error"><%= @book.errors[:body].join(", ") %></div>
+    <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Update Book" %>
-  </div>
+  <%= f.submit "Update Book" %>
 <% end %>
-
