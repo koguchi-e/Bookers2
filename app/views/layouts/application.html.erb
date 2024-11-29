@@ -56,13 +56,14 @@
       </div>
     <% end %>
 
-    <!-- ログインしている場合にのみユーザー情報を表示 -->
-    <% if user_signed_in? && @user.present? %>
+    <!-- ユーザー情報 -->
+    <!-- ログインしている場合にのみ表示 -->
+    <% if user_signed_in? && @user.present? && (params[:controller] != 'users' || params[:action] != 'edit') %>
       <div>
         <h3><%= @user.name %></h3>
         <%= image_tag @user.get_profile_image(100,100) %> <!-- ユーザーのプロフィール画像を表示 -->
         <% if @user == current_user %>
-          <p><%= link_to "user_image", edit_user_path(@user.id) %></p>
+          <p><%= link_to "編集", edit_user_path(@user.id) %></p>
         <% end %>
       </div>
     <% end %>
