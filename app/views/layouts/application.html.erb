@@ -56,6 +56,52 @@
       </div>
     <% end %>
 
+    <!-- ログインしている場合にのみユーザー情報を表示 -->
+    <% if user_signed_in? && @user.present? %>
+      <div>
+        <h3><%= @user.name %></h3>
+        <%= image_tag @user.get_profile_image(100,100) %> <!-- ユーザーのプロフィール画像を表示 -->
+        <% if @user == current_user %>
+          <p><%= link_to "user_image", edit_user_path(@user.id) %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <!-- 作成画面 -->
+    <% if user_signed_in? && @book.present? %> 
+      <h2>New Book</h2>
+      <!-- エラーメッセージ -->
+      <% if @book && @book.errors.any? %>
+        <div class="error-messages">
+          <h3>
+            <%= @book.errors.count %>
+            errors prohibited this book from being saved:
+          </h3>
+          <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <!-- 登録フォーム -->
+      <%= form_with model: @new_book, local: true do |f| %>
+        <div class="field">
+          <%= f.label :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+          <%= f.text_field :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+        </div>
+
+        <div class="field" style="margin-top: 5px;">
+          <%= f.label :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+          <%= f.text_area :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+        </div>
+        <!-- 登録ボタン -->
+        <div class="actions" style="margin-top: 5px;">
+          <%= f.submit "Create Book" %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 

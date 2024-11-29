@@ -5,13 +5,14 @@ class UsersController < ApplicationController
   # ユーザー一覧
   def index
     @users = User.all # すべてのユーザーを取得
+    @new_book = Book.new  # 新規作成フォーム用のBookインスタンス
   end
   
   # ユーザー詳細
   def show
-    # ログインユーザーのページを表示する処理
-    @user = User.find(params[:id])
-    @books = @user.books.page(params[:page])
+    @user = User.find(params[:id])  # ユーザー情報を取得
+    @new_book = Book.new  # 新規作成フォーム用のBookインスタンス
+    @books = @user.books.page(params[:page])  # ユーザーに関連する本の情報をページネーションで取得
   end
 
   # ユーザー編集ページ

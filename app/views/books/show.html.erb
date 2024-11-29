@@ -1,2 +1,22 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<h2>Book Detail</h2>
+
+<!-- ユーザーの画像と名前 -->
+<div>
+  <!-- ユーザーがプロフィール画像を持っている場合は表示 -->
+  <%= image_tag @book.user.get_profile_image(100, 100) %> 
+  <%= @book.user.name %>
+</div>
+
+<!-- 本の詳細 -->
+<div>
+  <%= @book.title %>
+  <%= @book.body %>
+</div>
+
+<!-- 投稿した本人のみ編集・削除のリンクを表示 -->
+<% if @book.user == current_user %>  
+  <div>
+    <%= link_to 'Edit', edit_book_path(@book) %> 
+    <%= link_to 'Delete', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
