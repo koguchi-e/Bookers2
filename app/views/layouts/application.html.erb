@@ -1,111 +1,125 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bookers2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Bookers2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <script src="https://kit.fontawesome.com/38dc52f0f7.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
-  </head>
+  <script src="https://kit.fontawesome.com/38dc52f0f7.js" crossorigin="anonymous"></script>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+</head>
 
+<body class="d-flex flex-column vh-100">
   <header>
-      <!-- 共通リンク -->
-      <li class="nav-item">
+    <!-- ナビゲーション -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!-- ルートパス -->
+      <li class="nav-link text-light">
         <%= link_to 'Bookers', root_path %>
       </li>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
       <!-- ログインしてる人のみリンク -->
       <% if user_signed_in? %>
-          <li class="nav-item">
+          <li class="nav-link text-light">
+            <i class="fa-solid fa-house"></i>
             <%= link_to 'Home', user_path(current_user) %>
           </li>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-users"></i>
           <%= link_to 'Users', users_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-book-open"></i>
           <%= link_to "Books", books_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-right-from-bracket"></i>
           <%= link_to "Log out", destroy_user_session_path, method: :delete %>
         </li>
 
       <!-- ログインしてない時のリンク -->
       <% else %>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-house"></i>
           <%= link_to 'Home', root_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-link"></i>
           <%= link_to 'About', about_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-user-plus"></i>
           <%= link_to "Sign up", new_user_registration_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-right-to-bracket"></i>
           <%= link_to "Log in", new_user_session_path %>
         </li>
       <% end %>
+    </nav>
   </header>
 
-  <body>
-    <% flash.each do |key, message| %>
-      <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
-        <%= message %>
+  <% flash.each do |key, message| %>
+    <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+      <%= message %>
+    </div>
+  <% end %>
+
+  <!-- ユーザー情報 -->
+  <!-- ログインしている場合にのみ表示 -->
+  <!-- ユーザのshow・edit画面は除く -->
+  <% if user_signed_in? && @user.present? && !(params[:controller] == 'users' && ['edit', 'show'].include?(params[:action])) %>
+    <div>
+      <h3><%= @user.name %></h3>
+      <%= image_tag @user.get_profile_image(100,100) %> <!-- ユーザーのプロフィール画像を表示 -->
+      <% if @user == current_user %>
+        <p><%= link_to "編集", edit_user_path(@user.id) %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- 作成画面 -->
+  <% if user_signed_in? && @new_book.present? %> 
+    <h2>New Book</h2>
+    <!-- エラーメッセージ -->
+    <% if @new_book.errors.any? %>
+      <div class="error-messages">
+        <h3>
+          <%= @new_book.errors.count %>
+          errors prohibited this book from being saved:
+        </h3>
+        <ul>
+          <% @new_book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
+    <!-- 登録フォーム -->
+    <%= form_with model: @new_book, local: true do |f| %>
+      <div class="field">
+        <%= f.label :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+        <%= f.text_field :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+      </div>
 
-    <!-- ユーザー情報 -->
-    <!-- ログインしている場合にのみ表示 -->
-    <!-- ユーザのshow・edit画面は除く -->
-    <% if user_signed_in? && @user.present? && !(params[:controller] == 'users' && ['edit', 'show'].include?(params[:action])) %>
-      <div>
-        <h3><%= @user.name %></h3>
-        <%= image_tag @user.get_profile_image(100,100) %> <!-- ユーザーのプロフィール画像を表示 -->
-        <% if @user == current_user %>
-          <p><%= link_to "編集", edit_user_path(@user.id) %></p>
-        <% end %>
+      <div class="field" style="margin-top: 5px;">
+        <%= f.label :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+        <%= f.text_area :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+      </div>
+      <!-- 登録ボタン -->
+      <div class="actions" style="margin-top: 5px;">
+        <%= f.submit "Create Book" %>
       </div>
     <% end %>
+  <% end %>
 
-    <!-- 作成画面 -->
-    <% if user_signed_in? && @new_book.present? %> 
-      <h2>New Book</h2>
-      <!-- エラーメッセージ -->
-      <% if @new_book.errors.any? %>
-        <div class="error-messages">
-          <h3>
-            <%= @new_book.errors.count %>
-            errors prohibited this book from being saved:
-          </h3>
-          <ul>
-            <% @new_book.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <!-- 登録フォーム -->
-      <%= form_with model: @new_book, local: true do |f| %>
-        <div class="field">
-          <%= f.label :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
-          <%= f.text_field :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
-        </div>
-
-        <div class="field" style="margin-top: 5px;">
-          <%= f.label :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
-          <%= f.text_area :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
-        </div>
-        <!-- 登録ボタン -->
-        <div class="actions" style="margin-top: 5px;">
-          <%= f.submit "Create Book" %>
-        </div>
-      <% end %>
-    <% end %>
-
-    <%= yield %>
-  </body>
+  <%= yield %>
+</body>
 
   <footer>
     <div class='footer'>

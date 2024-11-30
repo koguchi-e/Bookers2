@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   # ユーザーのパラメータを許可
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :introduction)
   end
 
   # ログインユーザーと一致しているか確認
