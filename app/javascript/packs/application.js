@@ -18,3 +18,5 @@ document.addEventListener('turbolinks:load', function () {
     nameInput.focus();  // 名前入力欄にフォーカスを設定
   }
 });
+
+

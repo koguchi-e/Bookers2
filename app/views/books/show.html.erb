@@ -3,33 +3,33 @@
 <!-- ユーザーの画像と名前 -->
 <table>
   <thead>
-      <tr>
-          <th></th>
-      </tr>
+    <tr>
+        <th></th>
+    </tr>
   </thead>
   
   <tbody>
-      <tr class="field">
-          <td class="user_image">
-            <%= image_tag @book.user.get_profile_image(100, 100) %> <br>
-            <!-- ユーザー詳細ページへのリンク -->
-            <%= link_to @book.user.name, user_path(@book.user) %> 
-          </td>
-          <td class="title">
-            <!-- 本の詳細ページへのリンク -->
-            <%= link_to @book.title, book_path(@book) %> 
-          </td>
-          <td class="body"><%= @book.body %></td>
+    <tr class="field">
+        <td class="user_image">
+          <%= image_tag @book.user.get_profile_image(100, 100) %> <br>
+          <!-- ユーザー詳細ページへのリンク -->
+          <%= link_to @book.user.name, user_path(@book.user) %> 
+        </td>
+        <td class="title">
+          <!-- 本の詳細ページへのリンク -->
+          <%= link_to @book.title, book_path(@book) %> 
+        </td>
+        <td class="body"><%= @book.body %></td>
 
-          <!-- 投稿した本人のみ編集・削除のリンクを表示 -->
-          <% if @book.user == current_user %>  
-            <td class="edit">
-              <%= link_to 'Edit', edit_book_path(@book) %> 
-            </td>
-            <td class="destroy">
-              <%= link_to 'Delete', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-          <% end %>
-      </tr>
+        <!-- 投稿した本人のみ編集・削除のリンクを表示 -->
+        <% if @book.user == current_user %>  
+          <td class="edit">
+            <%= link_to 'Edit', edit_book_path(@book) %> 
+          </td>
+          <td class="destroy">
+            <%= link_to 'Delete', book_path(@book), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        <% end %>
+    </tr>
   </tbody>
 </table>

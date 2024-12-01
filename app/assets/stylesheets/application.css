@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+ div.alert {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+div.alert-success {
+  background-color: transparent !important;
+  color: black !important;
+}
+

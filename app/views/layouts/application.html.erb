@@ -25,10 +25,10 @@
 
       <!-- ログインしてる人のみリンク -->
       <% if user_signed_in? %>
-          <li class="nav-link text-light">
-            <i class="fa-solid fa-house"></i>
-            <%= link_to 'Home', user_path(current_user) %>
-          </li>
+        <li class="nav-link text-light">
+          <i class="fa-solid fa-house"></i>
+          <%= link_to 'Home', user_path(current_user) %>
+        </li>
         <li class="nav-link text-light">
           <i class="fa-solid fa-users"></i>
           <%= link_to 'Users', users_path %>
@@ -41,8 +41,6 @@
           <i class="fa-solid fa-right-from-bracket"></i>
           <%= link_to "Log out", destroy_user_session_path, method: :delete %>
         </li>
-
-      <!-- ログインしてない時のリンク -->
       <% else %>
         <li class="nav-link text-light">
           <i class="fa-solid fa-house"></i>
@@ -70,60 +68,64 @@
     </div>
   <% end %>
 
-  <!-- ユーザー情報 -->
-  <!-- ログインしている場合にのみ表示 -->
-  <!-- ユーザのshow・edit画面は除く -->
-  <% if user_signed_in? && @user.present? && !(params[:controller] == 'users' && ['edit', 'show'].include?(params[:action])) %>
-    <div>
-      <h3><%= @user.name %></h3>
-      <%= image_tag @user.get_profile_image(100,100) %> <!-- ユーザーのプロフィール画像を表示 -->
-      <% if @user == current_user %>
-        <p><%= link_to "編集", edit_user_path(@user.id) %></p>
-      <% end %>
-    </div>
-  <% end %>
+  <!-- ここからサイドバー -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <!-- ユーザー情報 -->
+        <% if user_signed_in? && @user.present? && !(params[:controller] == 'users' && ['edit', 'show'].include?(params[:action])) %>
+          <div>
+            <h3><%= @user.name %></h3>
+            <%= image_tag @user.get_profile_image(100,100) %>
+            <% if @user == current_user %>
+              <p><%= link_to "編集", edit_user_path(@user.id) %></p>
+            <% end %>
+          </div>
+        <% end %>
 
-  <!-- 作成画面 -->
-  <% if user_signed_in? && @new_book.present? %> 
-    <h2>New Book</h2>
-    <!-- エラーメッセージ -->
-    <% if @new_book.errors.any? %>
-      <div class="error-messages">
-        <h3>
-          <%= @new_book.errors.count %>
-          errors prohibited this book from being saved:
-        </h3>
-        <ul>
-          <% @new_book.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+        <!-- 作成画面 -->
+        <% if user_signed_in? && @new_book.present? %> 
+          <h2>New Book</h2>
+          <% if @new_book.errors.any? %>
+            <div class="error-messages">
+              <h3><%= @new_book.errors.count %> errors prohibited this book from being saved:</h3>
+              <ul>
+                <% @new_book.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
           <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <!-- 登録フォーム -->
-    <%= form_with model: @new_book, local: true do |f| %>
-      <div class="field">
-        <%= f.label :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
-        <%= f.text_field :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+
+          <%= form_with model: @new_book, local: true do |f| %>
+            <div class="field">
+              <%= f.label :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+              <%= f.text_field :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
+            </div>
+
+            <div class="field" style="margin-top: 5px;">
+              <%= f.label :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+              <%= f.text_area :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+            </div>
+            <div class="actions" style="margin-top: 5px;">
+              <%= f.submit "Create Book" %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
 
-      <div class="field" style="margin-top: 5px;">
-        <%= f.label :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
-        <%= f.text_area :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
+      <!-- メインコンテンツ -->
+      <div class="col-lg-8"> 
+        <%= yield %>
       </div>
-      <!-- 登録ボタン -->
-      <div class="actions" style="margin-top: 5px;">
-        <%= f.submit "Create Book" %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <%= yield %>
-</body>
+    </div>
+  </div>
+  <!-- ここまでサイドバー -->
 
   <footer>
     <div class='footer'>
       <p>CopyRight Infratop.inc</p>
     </div>
   </footer>
+</body>
 </html>

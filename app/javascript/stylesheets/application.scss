@@ -1,1 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
+
+// カスタムスタイル
+.alert {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+.alert-success {
+  background-color: transparent !important;
+  color: black !important;
+}
