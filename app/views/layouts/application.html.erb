@@ -104,7 +104,7 @@
           </div>
           <!-- 作成画面 -->
           <% if user_signed_in? && @new_book.present? %> 
-            <h2>New Book</h2>
+            <h2>New book</h2>
             <% if @new_book.errors.any? %>
               <div class="error-messages">
                 <h3><%= @new_book.errors.count %> errors prohibited this book from being saved:</h3>
