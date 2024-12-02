@@ -14,11 +14,13 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id)
     else
-      @new_book = Book.new  # フォーム再表示のために新規のBookインスタンスを作成
-      @books = Book.page(params[:page])  # ページネーションを使用して@booksを設定
+      # バリデーションエラー情報を持った@bookを@new_bookとして利用
+      @new_book = @book  
+      @books = Book.page(params[:page])  # ページネーション用
       render :index
     end
   end
+  
 
   # 一覧画面表示
   def index

@@ -13,7 +13,11 @@
   <tbody>
     <% @books.each do |item| %>
       <tr class="field">
-        <td class="user_image"><%= image_tag item.user.get_profile_image(100,100) %></td>
+        <td class="user_image">
+          <%= link_to user_path(item.user) do %>
+            <%= image_tag item.user.get_profile_image(100,100) %>
+          <% end %>
+        </td>
         <td class="title"><%= link_to item.title, book_path(item.id) %></td>
         <td class="body"><%= item.body %></td>
       </tr>

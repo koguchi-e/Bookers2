@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]  
 
   # Aboutページのルート設定
-  get 'about', to: 'homes#about', as: 'about'
+  get 'home/about', to: 'homes#about', as: 'about'
 end

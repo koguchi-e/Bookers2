@@ -23,7 +23,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <!-- ログインしてる人のみリンク -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
@@ -75,6 +74,18 @@
     </div>
   <% end %>
 
+  <!-- 新規登録エラーメッセージ -->
+  <% if defined?(@new_book) && @new_book.present? && @new_book.errors.any? %>
+    <div class="error-messages">
+      <h3><%= @new_book.errors.count %> errors prohibited this book from being saved:</h3>
+      <ul>
+        <% @new_book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <!-- ここからサイドバー -->
   <div class="container">
     <div class="row">
@@ -93,14 +104,12 @@
             <div class="introduction-section">
               <b>introduction</b><b> <%= @user.introduction %></b>
             </div>
-            <!-- 編集ボタン（本人のみ表示） -->
-            <% if @user == current_user %>
-              <div class="edit">
-                <%= link_to edit_user_path(@user.id), class: 'icon-button' do %>
-                  <i class="fas fa-user-cog"></i>
-                <% end %>
-              </div>
-            <% end %>
+            <!-- 編集ボタン -->
+            <div class="edit-icon-button">
+              <%= link_to edit_user_path(@user.id) do %>
+                <i class="fas fa-user-cog"></i>
+              <% end %>
+            </div>
           </div>
           <!-- 作成画面 -->
           <% if user_signed_in? && @new_book.present? %> 

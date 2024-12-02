@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   # ユーザー編集ページ
   def edit
     @user = User.find(params[:id])
+    @new_book = Book.new
   end
 
   # ユーザー更新

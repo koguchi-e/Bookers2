@@ -273,7 +273,7 @@ footer {
 
 /* 編集ボタン */
 /* ボタンの基本スタイル */
-.icon-button {
+.edit-icon-button {
   display: block; /* ボタンをブロック要素にして、親コンテナの幅を引き継ぐ */
   width: 100%; /* 親の幅に合わせてボタンの幅を100%に */
   height: 40px;
@@ -286,7 +286,7 @@ footer {
 }
 
 /* アイコンのスタイル */
-.icon-button i {
+.edit-icon-button i {
   color: gray; /* 初期状態でアイコンをグレーに */
   display: inline-block; /* アイコンをインラインにする */
   text-align: center; /* アイコンを中央寄せ */
@@ -295,11 +295,11 @@ footer {
 }
 
 /* ホバー時のスタイル */
-.icon-button:hover {
+.edit-icon-button:hover {
   background-color: gray; /* 背景をグレーに塗りつぶす */
 }
 
-.icon-button:hover i {
+.edit-icon-button:hover i {
   color: white; /* アイコンを白に変更 */
 }
 

@@ -1,14 +1,25 @@
 <h2>User info</h2>
+
 <%= form_with model: @user do |f| %>
+  <!-- エラーメッセージを表示 -->
+  <%= render "devise/shared/error_messages", resource: @user %>
 
+  <div class="field">
     <label for="inputName">Name</label><br>
-    <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"Name" %><br>
+    <%= f.text_field :name, autofocus: true, id: "inputName", placeholder: "Name" %><br>
+  </div>
 
+  <div class="field">
     <label for="inputImage">Image</label><br>
     <%= f.file_field :profile_image, placeholder: "Image", accept: "image/*" %><br>
+  </div>
 
+  <div class="field">
     <label for="Introduction">Introduction</label><br>
-    <%= f.text_field :introduction, autofocus: true, id:"Introduction" %><br>
+    <%= f.text_field :introduction, id: "Introduction", placeholder: "Introduction" %><br>
+  </div>
 
+  <div class="actions">
     <%= f.submit "Update User", class: "btn btn-update" %>
+  </div>
 <% end %>
