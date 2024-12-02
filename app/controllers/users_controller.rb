@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :edit, :update], except: [:new, :create]
+  before_action :authenticate_user!, only: [:index,:show, :edit, :update], except: [:new, :create]
   before_action :is_matching_login_user, only: [:edit, :update]
 
   # ユーザー一覧
@@ -10,10 +10,19 @@ class UsersController < ApplicationController
   
   # ユーザー詳細
   def show
-    @user = User.find(params[:id])  # ユーザー情報を取得
-    @new_book = Book.new  # 新規作成フォーム用のBookインスタンス
-    @books = @user.books.page(params[:page])  # ユーザーに関連する本の情報をページネーションで取得
+    @user = User.find(params[:id])
+    @new_book = Book.new
+    @books = @user.books.page(params[:page])
+    
+    # 本がパラメータで指定されていればその本を取得
+    if params[:book_id]
+      @book = @user.books.find_by(id: params[:book_id])
+    else
+      # 本の詳細ページを表示したい場合のデフォルトの本を設定
+      @book = @user.books.first # または他の適切なロジック
+    end
   end
+  
 
   # ユーザー編集ページ
   def edit
