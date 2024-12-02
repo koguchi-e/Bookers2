@@ -1,5 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
+// #####################################
+
 /* body と html の高さを100%に設定 */
 html, body {
   height: 100%; /* ページ全体の高さを100%に */
@@ -70,16 +72,36 @@ footer {
 // #####################################
 
 /* トップページ */
+/* トップページ */
+.top-page-content {
+  width: 100%; /* 幅を100%に設定 */
+  max-width: 800px; /* 最大幅を設定してコンテンツが広がりすぎないように */
+  margin-left: auto; /* 左右中央に配置 */
+  margin-right: auto; /* 左右中央に配置 */
+  padding: 20px;
+  box-sizing: border-box; /* パディングを幅に含める */
+}
+
+/* top-text 内の文章を左寄せ */
+.top-page-content .top-text {
+  text-align: left; /* 左寄せ */
+  margin-bottom: 20px;
+}
+
+/* ログインボタンの親要素 */
+.login, .signup {
+  text-align: center; /* ボタンを中央寄せ */
+  margin-top: 10px; /* 上部の余白を設定 */
+}
+
 /* ログインボタン */
 .login .btn-primary {
-  display: block; /* ボタンをブロック要素にすることで親要素の幅に合わせる */
-  width: 100%; /* 親要素の幅に合わせる */
+  text-align: center; /* ボタンを中央寄せ */
   padding: 10px 20px;
-  background-color: #17a2b8; /* 青緑色 */
+  background-color: #007bff; /* 元の青色 */
   color: white; /* 文字色は白 */
   border: none;
   border-radius: 8px; /* 角を丸く */
-  font-size: 16px;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s; /* ホバー時のアニメーション */
@@ -88,20 +110,18 @@ footer {
 
 /* ログインボタンのホバー時 */
 .login .btn-primary:hover {
-  background-color: #138496; /* 少し暗い青緑 */
+  background-color: #0056b3; /* 元のホバー時の色 */
   color: white!important; /* 文字色は白 */
 }
 
 /* サインアップボタン */
 .signup .btn-secondary {
-  display: block; /* ボタンをブロック要素にすることで親要素の幅に合わせる */
-  width: 100%; /* 親要素の幅に合わせる */
+  text-align: center; /* ボタンを中央寄せ */
   padding: 10px 20px;
   background-color: #28a745; /* 明るい緑色 */
   color: white;
   border: none;
   border-radius: 8px; /* 角を丸く */
-  font-size: 16px;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s; /* ホバー時のアニメーション */
@@ -175,7 +195,6 @@ footer {
   color: white; /* 文字色を白に設定 */
   border: none; /* ボーダーを無くす */
   border-radius: 8px; /* 角を丸くする */
-  font-size: 16px; /* 文字サイズ */
   text-decoration: none; /* リンクの下線を消す */
   cursor: pointer; /* マウスポインタを手のひらに */
   transition: background-color 0.3s; /* ホバー時のアニメーション */
@@ -269,7 +288,6 @@ footer {
 /* アイコンのスタイル */
 .icon-button i {
   color: gray; /* 初期状態でアイコンをグレーに */
-  font-size: 20px; /* アイコンのサイズを調整 */
   display: inline-block; /* アイコンをインラインにする */
   text-align: center; /* アイコンを中央寄せ */
   margin: 0; /* アイコンの余白を調整 */
@@ -299,7 +317,7 @@ footer {
   vertical-align: middle; /* 画像が中央に配置されるように */
 }
 
-/* ボタンのスタイル（再度記載） */
+/* ボタンのスタイル */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -308,7 +326,6 @@ footer {
   border-radius: 8px; /* 角を丸くする */
   text-decoration: none; /* リンクの下線を消す */
   transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーション */
-  font-size: 14px; /* ボタンのフォントサイズ */
 }
 
 .btn-edit {
@@ -394,9 +411,31 @@ footer {
 }
 
 .users-table .name {
-  padding-left: 15px; /* 名前と画像の間隔を15pxに調整 */
+  padding-left: 80px; /* 名前と画像の間隔を15pxに調整 */
 }
 
 .users-table .option {
   padding-left: 15px; /* 名前とShowリンクの間隔を15pxに調整 */
+}
+
+// #####################################
+
+/* 本編集画面ボタン */
+.btn-editing-book{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px; /* 余白を小さく調整 */
+  border-radius: 8px; /* 角を丸くする */
+  text-decoration: none; /* リンクの下線を消す */
+  transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーション */
+  background-color:  #34b27e; /* 緑色で塗りつぶす */
+  color: white; /* 文字色は白 */
+  border: none; /* 境界線を消す */
+  box-shadow: none; /* 影を消す */
+}
+
+.btn-editing-book:hover {
+  background-color: darkgreen; /* ホバー時に緑が少し暗くなる */
+  color: white !important;
 }

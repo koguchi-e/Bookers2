@@ -1,3 +1,4 @@
+<h2>Editing Book</h2>
 <%= form_with model: @book, local: true do |f| %>
   <div class="field">
     <%= f.label :title %><br>
@@ -15,5 +16,10 @@
     <% end %>
   </div>
 
-  <%= f.submit "Update Book" %>
+  <!-- 更新ボタン -->
+  <%= f.submit "Update Book", class: "btn-editing-book" %><br>
+  <!-- 詳細画面リンク -->
+  <%= link_to "Show", book_path(@book) %> | 
+  <!-- 一覧画面に戻るリンク -->
+  <%= link_to "Back", books_path %>
 <% end %>
