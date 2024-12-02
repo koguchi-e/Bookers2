@@ -1,7 +1,28 @@
-<h1>Users</h1>
+<!-- ユーザ一覧画面 -->
+<h2>Users</h2>
+<hr>
+<table class="users-table">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="field">
+        <td class="user_image">
+          <%= image_tag user.get_profile_image(100, 100) %>
+        </td>
+        <td class="name">
+          <%= user.name %>
+        </td>
+        <td class="option">
+          <%= link_to 'Show', user_path(user)%> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<ul>
-  <% @users.each do |user| %>
-    <li><%= link_to user.name, user_path(user) %></li>  <!-- ユーザー詳細ページへのリンク -->
-  <% end %>
-</ul>

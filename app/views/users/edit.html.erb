@@ -1,5 +1,4 @@
 <h2>User info</h2>
-
 <%= form_with model: @user do |f| %>
 
     <label for="inputName">Name</label><br>
@@ -11,5 +10,5 @@
     <label for="Introduction">Introduction</label><br>
     <%= f.text_field :introduction, autofocus: true, id:"Introduction" %><br>
 
-    <%= f.submit "Update User" %>
+    <%= f.submit "Update User", class: "btn btn-update" %>
 <% end %>

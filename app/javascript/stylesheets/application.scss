@@ -6,7 +6,7 @@ html, body {
   margin: 0; /* 余白をリセット */
 }
 
-// カスタムスタイル
+// フラッシュメッセージ
 .alert {
   background-color: transparent !important;
   color: black !important;
@@ -16,6 +16,8 @@ html, body {
   background-color: transparent !important;
   color: black !important;
 }
+
+// #####################################
 
 /* ナビゲーションリンクの文字色を白に設定 */
 .navbar-brand {
@@ -42,7 +44,6 @@ html, body {
   margin-right: 0; /* 最後のリンクに余分なスペースを追加しない */
 }
 
-
 /* アイコンの色を白に設定 */
 .navbar-brand i,
 .navbar-nav .nav-item i {
@@ -56,10 +57,346 @@ html, body {
   text-decoration: none !important; /* ホバー時も下線を消す */
 }
 
+// #####################################
+
 /* フッターを画面中央に配置 */
 footer {
   display: flex; /* フレックスボックスを有効化 */
   justify-content: center; /* 水平方向の中央寄せ */
   align-items: center; /* 垂直方向の中央寄せ */
   height: 100%; /* フッターをページ全体の高さに拡大 */
+}
+
+// #####################################
+
+/* トップページ */
+/* ログインボタン */
+.login .btn-primary {
+  display: block; /* ボタンをブロック要素にすることで親要素の幅に合わせる */
+  width: 100%; /* 親要素の幅に合わせる */
+  padding: 10px 20px;
+  background-color: #17a2b8; /* 青緑色 */
+  color: white; /* 文字色は白 */
+  border: none;
+  border-radius: 8px; /* 角を丸く */
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s; /* ホバー時のアニメーション */
+  margin-bottom: 10px; /* ログインボタンとサインアップボタンの間隔を開ける */
+}
+
+/* ログインボタンのホバー時 */
+.login .btn-primary:hover {
+  background-color: #138496; /* 少し暗い青緑 */
+  color: white!important; /* 文字色は白 */
+}
+
+/* サインアップボタン */
+.signup .btn-secondary {
+  display: block; /* ボタンをブロック要素にすることで親要素の幅に合わせる */
+  width: 100%; /* 親要素の幅に合わせる */
+  padding: 10px 20px;
+  background-color: #28a745; /* 明るい緑色 */
+  color: white;
+  border: none;
+  border-radius: 8px; /* 角を丸く */
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s; /* ホバー時のアニメーション */
+}
+
+/* サインアップボタンのホバー時 */
+.signup .btn-secondary:hover {
+  background-color: #218838; /* ホバー時に少し暗い緑 */
+  color: white!important; /* 文字色は白 */
+}
+
+// #####################################
+
+/* devise画面 */
+/* ログインボタン */
+.actions .btn-primary {
+  background-color: #007bff; /* 青色 */
+  color: white; /* 文字色は白 */
+  border: none;
+  border-radius: 8px; /* 角を丸く */
+  transition: background-color 0.3s; /* ホバー時のアニメーション */
+}
+
+.actions .btn-primary:hover {
+  background-color: #0056b3; /* 少し暗い青 */
+  color: white!important; /* 文字色は白 */
+}
+
+/* サインアップボタン */
+.actions .btn-secondary {
+  background-color: #28a745; /* 緑色 */
+  color: white; /* 文字色は白 */
+  border: none;
+  border-radius: 8px; /* 角を丸く */
+  transition: background-color 0.3s; /* ホバー時のアニメーション */
+}
+
+.actions .btn-secondary:hover {
+  background-color: #218838; /* 少し暗い緑 */
+  color: white!important; /* 文字色は白 */
+}
+
+// #####################################
+
+/* ユーザ情報線を引く */
+.user-info hr {
+  border: none !important;
+  height: 1px !important;
+  background-color: #ddd !important;
+  margin: 10px 0 !important;
+}
+
+/* ユーザ情報間隔開ける */
+.user-info .name-section b,
+.user-info .introduction-section b {
+  margin-right: 20px; /* ラベルとデータの間の間隔を10pxに設定 */
+}
+
+/* introduction と編集ボタンの間隔を開ける */
+.introduction-section {
+  margin-bottom: 50px;
+}
+
+// #####################################
+
+/* Create Book ボタン（新規作成ボタン） */
+.submit-button {
+  display: inline-block; /* ボタンをインラインブロックに設定 */
+  padding: 10px 20px; /* ボタンの余白を調整 */
+  background-color: #34b27e; /* 緑色で塗りつぶす */
+  color: white; /* 文字色を白に設定 */
+  border: none; /* ボーダーを無くす */
+  border-radius: 8px; /* 角を丸くする */
+  font-size: 16px; /* 文字サイズ */
+  text-decoration: none; /* リンクの下線を消す */
+  cursor: pointer; /* マウスポインタを手のひらに */
+  transition: background-color 0.3s; /* ホバー時のアニメーション */
+}
+
+/* ホバー時のスタイル */
+.submit-button:hover {
+  background-color: darkgreen; /* ホバー時に緑が少し暗くなる */
+  color: white!important; /* 文字色は白 */
+}
+
+// #####################################
+
+/* 本一覧画面 */
+/* テーブル全体の線のスタイル */
+.books-table {
+  border-collapse: collapse; /* 線が重ならないようにする */
+  width: 100%; /* テーブルを全幅にする */
+}
+
+/* ヘッダー行の下に線を引く */
+.books-table thead tr th {
+  border-bottom: 2px solid #ddd; /* ヘッダー行の下に線を引く */
+  padding: 8px; /* ヘッダー内の余白 */
+  text-align: left; /* テキストを左揃え */
+}
+
+/* 各行の下に線を引く */
+.books-table tbody tr {
+  border-bottom: 1px solid #ddd; /* 行の下に線を引く */
+}
+
+/* 最後の行には線を引かない */
+.books-table tbody tr:last-child {
+  border-bottom: none; /* 最後の行の線を消す */
+}
+
+/* 行内のセルに余白を追加 */
+.books-table tbody td {
+  padding: 8px; /* 各セル内に余白を追加 */
+}
+
+// #####################################
+
+/* 各ユーザーの投稿一覧 */
+/* テーブル全体のスタイル */
+.books-table {
+  border-collapse: collapse; /* 線を重ならないようにする */
+  width: 100%; /* テーブルを全幅にする */
+  margin-top: 10px; /* タイトルとの間隔 */
+}
+
+/* ヘッダーのスタイル */
+.books-table thead tr th {
+  border-bottom: 2px solid #ddd; /* ヘッダー下に線を引く */
+  padding: 8px; /* ヘッダー内の余白 */
+  text-align: left; /* テキストを左揃え */
+}
+
+/* 各行の線 */
+.books-table tbody tr {
+  border-bottom: 1px solid #ddd; /* 各行の下に線を引く */
+}
+
+/* 最後の行には線を引かない */
+.books-table tbody tr:last-child {
+  border-bottom: none; /* 最後の行の線を消す */
+}
+
+/* 各セルの余白 */
+.books-table tbody td {
+  padding: 8px; /* セル内に余白を追加 */
+}
+
+// #####################################
+
+/* 編集ボタン */
+/* ボタンの基本スタイル */
+.icon-button {
+  display: block; /* ボタンをブロック要素にして、親コンテナの幅を引き継ぐ */
+  width: 100%; /* 親の幅に合わせてボタンの幅を100%に */
+  height: 40px;
+  padding: 10px 15px; /* ボタン内の余白を調整 */
+  border: 1px solid gray; /* 線で囲む */
+  border-radius: 8px; /* 角を丸くする */
+  background-color: transparent; /* 初期背景は透明 */
+  text-decoration: none; /* リンクの下線を消す */
+  transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーション */
+}
+
+/* アイコンのスタイル */
+.icon-button i {
+  color: gray; /* 初期状態でアイコンをグレーに */
+  font-size: 20px; /* アイコンのサイズを調整 */
+  display: inline-block; /* アイコンをインラインにする */
+  text-align: center; /* アイコンを中央寄せ */
+  margin: 0; /* アイコンの余白を調整 */
+  width: 100%; /* アイコンがボタン内で中央に配置されるようにする */
+}
+
+/* ホバー時のスタイル */
+.icon-button:hover {
+  background-color: gray; /* 背景をグレーに塗りつぶす */
+}
+
+.icon-button:hover i {
+  color: white; /* アイコンを白に変更 */
+}
+
+// #####################################
+
+/* 各本の詳細ページ（編集・削除リンク） */
+/* 画像、タイトル、本文、編集・削除ボタンが横並びになるように */
+.field td {
+  padding: 10px;
+  vertical-align: middle; /* アイコンやボタンが中央に配置されるように */
+}
+
+/* 画像とその項目を同じ高さにする */
+.user_image img {
+  vertical-align: middle; /* 画像が中央に配置されるように */
+}
+
+/* ボタンのスタイル（再度記載） */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px; /* 余白を小さく調整 */
+  border-radius: 8px; /* 角を丸くする */
+  text-decoration: none; /* リンクの下線を消す */
+  transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーション */
+  font-size: 14px; /* ボタンのフォントサイズ */
+}
+
+.btn-edit {
+  background-color:  #34b27e; /* 緑色で塗りつぶす */
+  color: white; /* 文字色は白 */
+}
+
+.btn-delete {
+  background-color: red; /* 赤色の背景 */
+  color: white; /* 文字色は白 */
+}
+
+.btn-edit:hover {
+  background-color: darkgreen; /* ホバー時に緑が少し暗くなる */
+  color: white !important;
+}
+
+.btn-delete:hover {
+  opacity: 0.8;
+  color: white!important; /* 文字色は白 */
+}
+
+// #####################################
+
+/* ユーザ編集ページ */
+.btn-update {
+  border-radius: 8px; /* 角を丸く */
+  background-color: #6c757d; /* 濃いグレー */
+  color: white; /* 白文字 */
+  border: none;
+  transition: background-color 0.3s ease; /* ホバー時の色変更をスムーズに */
+  margin-top: 5px;
+}
+
+/* ホバー時に色を暗くする */
+.btn-update:hover {
+  background-color: #5a6268; /* 少し暗いグレー */
+  color: white!important; /* 文字色は白 */
+}
+
+// #####################################
+
+/* 全体の一覧画面 */
+.books-table tbody tr:hover {
+  background-color: #e8e8e8; /* 薄いグレー */
+  transition: background-color 0.3s ease; /* スムーズな背景色変更 */
+}
+
+// #####################################
+
+\/* ユーザ一覧画面 */
+/* ユーザーの行にスタイルを追加 */
+.users-table {
+  border-collapse: collapse; /* 線を重ならないようにする */
+  width: 100%; /* テーブルを全幅にする */
+  margin-top: 5px; /* タイトルとの間隔 */
+}
+
+.users-table thead tr th {
+  border-bottom: 2px solid #ddd; /* ヘッダー下に線を引く */
+  padding: 8px; /* ヘッダー内の余白 */
+  text-align: left; /* テキストを左揃え */
+}
+
+.users-table tbody tr {
+  border-bottom: 1px solid #ddd; /* 各行の下に線を引く */
+}
+
+.users-table .user_image {
+  width: 20px;
+  height: 20px;
+  margin-right: 15px; /* 画像と名前の間に15pxの余白を追加 */
+}
+
+/* 最後の行には線を引かない */
+.users-table tbody tr:last-child {
+  border-bottom: none; /* 最後の行の線を消す */
+}
+
+/* 各セルの余白 */
+.users-table tbody td {
+  padding: 8px; /* セル内に余白を追加 */
+}
+
+.users-table .name {
+  padding-left: 15px; /* 名前と画像の間隔を15pxに調整 */
+}
+
+.users-table .option {
+  padding-left: 15px; /* 名前とShowリンクの間隔を15pxに調整 */
 }

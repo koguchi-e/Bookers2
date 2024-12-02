@@ -81,11 +81,25 @@
       <div class="col-lg-4">
         <!-- ユーザー情報 -->
         <% if user_signed_in? && @user.present? && !(params[:controller] == 'users' && ['edit'].include?(params[:action])) %>
-          <div>
-            <h3><%= @user.name %></h3>
+          <div class="user-info">
+            <h3>User info</h3>
             <%= image_tag @user.get_profile_image(100,100) %>
+            <hr>
+            <div class="name-section">
+              <b>name</b><b><%= @user.name %></b>
+            </div>
+            <hr>
+            <!-- ユーザーの自己紹介 -->
+            <div class="introduction-section">
+              <b>introduction</b><b> <%= @user.introduction %></b>
+            </div>
+            <!-- 編集ボタン（本人のみ表示） -->
             <% if @user == current_user %>
-              <p><%= link_to "編集", edit_user_path(@user.id) %></p>
+              <div class="edit">
+                <%= link_to edit_user_path(@user.id), class: 'icon-button' do %>
+                  <i class="fas fa-user-cog"></i>
+                <% end %>
+              </div>
             <% end %>
           </div>
           <!-- 作成画面 -->
@@ -112,7 +126,7 @@
                 <%= f.text_area :body, class: @new_book.errors[:body].any? ? 'field_with_errors' : '' %><br>
               </div>
               <div class="actions" style="margin-top: 5px;">
-                <%= f.submit "Create Book" %>
+                <%= f.submit "Create Book", class: "submit-button" %>
               </div>
             <% end %>
           <% end %>
