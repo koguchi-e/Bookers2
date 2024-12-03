@@ -31,12 +31,15 @@ class UsersController < ApplicationController
     end
   end
 
-  
-
   # ユーザー編集ページ
   def edit
     @user = User.find(params[:id])
     @new_book = Book.new
+
+    # 自分以外のユーザーの編集ページにアクセスした場合、ログインユーザのページにリダイレクト
+    if @user != current_user
+      redirect_to user_path(current_user) 
+    end
   end
 
   # ユーザー更新
@@ -60,7 +63,7 @@ class UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to root_path, alert: "You are not authorized to access this page."
+      redirect_to user_path(current_user.id) 
     end
   end
 end

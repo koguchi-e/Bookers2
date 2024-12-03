@@ -88,7 +88,7 @@
   <!-- ここからサイドバー -->
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 offset-md-1">
         <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
         <!-- ユーザー情報（users/show 以外で表示） -->
         <div class="user-info">
@@ -103,14 +103,8 @@
           </div>
           <!-- 編集ボタン -->
           <div class="edit-icon-button">
-            <% if @user.present? && current_user == @user %>
-              <!-- 自分のページなら編集画面に遷移 -->
-              <%= link_to edit_user_path(current_user.id) do %>
-                <i class="fas fa-user-cog"></i>
-              <% end %>
-            <% else %>
-              <!-- 他人のページなら自分のユーザーページに遷移 -->
-              <%= link_to user_path(current_user.id) do %>
+            <% if current_user == @user || current_user != @user %> <!-- 編集リンクを常に表示 -->
+              <%= link_to edit_user_path(@user) do %>
                 <i class="fas fa-user-cog"></i>
               <% end %>
             <% end %>
