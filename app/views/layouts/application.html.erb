@@ -90,29 +90,37 @@
     <div class="row">
       <div class="col-lg-4">
         <!-- ユーザー情報 -->
-        <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') %>
+        <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
           <div class="user-info">
             <h3>User info</h3>
-            <!-- ログインしているユーザー情報を表示 -->
-            <%= image_tag current_user.get_profile_image(100, 100) %>
+            <!-- 表示するユーザー情報を切り替え -->
+            <%= image_tag @user.get_profile_image(100, 100) %>
             <div class="name-section">
-              <b>name</b><b><%= current_user.name %></b>
+              <b>name</b><b><%= @user.name %></b>
             </div>
             <div class="introduction-section">
-              <b>introduction</b><b> <%= current_user.introduction %></b>
+              <b>introduction</b><b> <%= @user.introduction %></b>
             </div>
 
             <!-- 編集ボタン -->
             <div class="edit-icon-button">
-              <%= link_to edit_user_path(current_user.id) do %>
-                <i class="fas fa-user-cog"></i>
+              <% if current_user == @user %>
+                <!-- 自分のページなら編集画面に遷移 -->
+                <%= link_to edit_user_path(current_user.id) do %>
+                  <i class="fas fa-user-cog"></i>
+                <% end %>
+              <% else %>
+                <!-- 他人のページなら自分のユーザーページに遷移 -->
+                <%= link_to user_path(current_user.id) do %>
+                  <i class="fas fa-user-cog"></i>
+                <% end %>
               <% end %>
             </div>
           </div>
         <% end %>
 
         <!-- 作成画面 -->
-        <% if user_signed_in? && @new_book.present? %>
+        <% if user_signed_in? && @new_book.present? && !(params[:action] == 'edit') %>
           <h2>New book</h2>
           <% if @new_book.errors.any? %>
             <div class="error-messages">
