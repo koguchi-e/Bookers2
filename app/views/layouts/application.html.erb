@@ -86,10 +86,10 @@
   <% end %>
 
   <!-- ここからサイドバー -->
-  <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
   <div class="container">
     <div class="row">
       <div class="col-md-3">
+        <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
         <!-- ユーザー情報（users/show 以外で表示） -->
         <div class="user-info">
           <h3>User info</h3>
@@ -144,6 +144,7 @@
             </div>
           <% end %>
         <% end %>
+        <% end %>
       </div>
       <!-- サイドバーここまで -->
       <!-- メインコンテンツ -->
@@ -152,7 +153,6 @@
       </div>
     </div>
   </div>
-  <% end %>
 
   <footer>
     <div class='footer'>
