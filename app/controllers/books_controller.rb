@@ -20,7 +20,6 @@ class BooksController < ApplicationController
       render :index
     end
   end
-  
 
   # 一覧画面表示
   def index
@@ -31,6 +30,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])  # idで本の情報を取得
     @new_book = Book.new  # 新規作成フォーム用のBookインスタンス
+    @user = current_user
   end
 
   # 本の編集・更新

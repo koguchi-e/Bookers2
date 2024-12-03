@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @new_book = Book.new
     @books = @user.books.page(params[:page])
-    
+
     # 本がパラメータで指定されていればその本を取得
     if params[:book_id]
       @book = @user.books.find_by(id: params[:book_id])
@@ -21,7 +21,16 @@ class UsersController < ApplicationController
       # 本の詳細ページを表示したい場合のデフォルトの本を設定
       @book = @user.books.first # または他の適切なロジック
     end
+    
+    # 他の本（他のユーザーの本）を表示したい場合に対応
+    if params[:book_id] && params[:other_user_id]
+      @other_user = User.find(params[:other_user_id])
+      @other_book = @other_user.books.find_by(id: params[:book_id])
+    else
+      @other_book = nil
+    end
   end
+
   
 
   # ユーザー編集ページ

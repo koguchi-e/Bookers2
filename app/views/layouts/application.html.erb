@@ -86,39 +86,36 @@
   <% end %>
 
   <!-- ここからサイドバー -->
+  <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
-        <!-- ユーザー情報 -->
-        <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
-          <div class="user-info">
-            <h3>User info</h3>
-            <!-- 表示するユーザー情報を切り替え -->
-            <%= image_tag @user.get_profile_image(100, 100) %>
-            <div class="name-section">
-              <b>name</b><b><%= @user.name %></b>
-            </div>
-            <div class="introduction-section">
-              <b>introduction</b><b> <%= @user.introduction %></b>
-            </div>
-
-            <!-- 編集ボタン -->
-            <div class="edit-icon-button">
-              <% if current_user == @user %>
-                <!-- 自分のページなら編集画面に遷移 -->
-                <%= link_to edit_user_path(current_user.id) do %>
-                  <i class="fas fa-user-cog"></i>
-                <% end %>
-              <% else %>
-                <!-- 他人のページなら自分のユーザーページに遷移 -->
-                <%= link_to user_path(current_user.id) do %>
-                  <i class="fas fa-user-cog"></i>
-                <% end %>
-              <% end %>
-            </div>
+      <div class="col-md-3">
+        <!-- ユーザー情報（users/show 以外で表示） -->
+        <div class="user-info">
+          <h3>User info</h3>
+          <!-- 表示するユーザー情報を切り替え -->
+          <%= image_tag (@user.present? ? @user.get_profile_image(100, 100) : current_user.get_profile_image(100, 100)) %>
+          <div class="name-section">
+            <b>name</b><b><%= @user.present? ? @user.name : current_user.name %></b>
           </div>
-        <% end %>
-
+          <div class="introduction-section">
+            <b>introduction</b><b> <%= @user.present? ? @user.introduction : current_user.introduction %></b>
+          </div>
+          <!-- 編集ボタン -->
+          <div class="edit-icon-button">
+            <% if @user.present? && current_user == @user %>
+              <!-- 自分のページなら編集画面に遷移 -->
+              <%= link_to edit_user_path(current_user.id) do %>
+                <i class="fas fa-user-cog"></i>
+              <% end %>
+            <% else %>
+              <!-- 他人のページなら自分のユーザーページに遷移 -->
+              <%= link_to user_path(current_user.id) do %>
+                <i class="fas fa-user-cog"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
         <!-- 作成画面 -->
         <% if user_signed_in? && @new_book.present? && !(params[:action] == 'edit') %>
           <h2>New book</h2>
@@ -149,13 +146,13 @@
         <% end %>
       </div>
       <!-- サイドバーここまで -->
-
       <!-- メインコンテンツ -->
-      <div class="col-lg-8">
+      <div class="col-md-8">
         <%= yield %>
       </div>
     </div>
   </div>
+  <% end %>
 
   <footer>
     <div class='footer'>
