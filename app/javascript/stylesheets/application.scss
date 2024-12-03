@@ -59,6 +59,12 @@ html, body {
   text-decoration: none !important; /* ホバー時も下線を消す */
 }
 
+/* ホバー時のアイコンの色 */
+.navbar-brand a:hover i,
+.navbar-nav .nav-item a:hover i {
+  color: gray !important; /* ホバー時のアイコンの色を灰色に設定 */
+}
+
 // #####################################
 
 /* フッターを画面中央に配置 */
