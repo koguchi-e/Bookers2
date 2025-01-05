@@ -27,37 +27,45 @@
           <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li class="nav-item">
-                <i class="fa-solid fa-house"></i>
-                <%= link_to 'Home', user_path(current_user) %>
+                <%= link_to user_path(current_user) do %>
+                  <i class="fa-solid fa-house"></i> Home
+                <% end %>
               </li>
               <li class="nav-item">
-                <i class="fa-solid fa-users"></i>
-                <%= link_to 'Users', users_path %>
+                <%= link_to users_path do %>
+                  <i class="fa-solid fa-users"></i> Users
+                <% end %>
               </li>
               <li class="nav-item">
-                <i class="fa-solid fa-book-open"></i>
-                <%= link_to "Books", books_path %>
+                <%= link_to books_path do %>
+                  <i class="fa-solid fa-book-open"></i> Books
+                <% end %>
               </li>
               <li class="nav-item">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                  <i class="fa-solid fa-right-from-bracket"></i> Log out
+                <% end %>
               </li>
             <% else %>
               <li class="nav-item">
-                <i class="fa-solid fa-house"></i>
-                <%= link_to 'Home', root_path %>
+                <%= link_to root_path do %>
+                  <i class="fa-solid fa-house"></i> Home
+                <% end %>
               </li>
               <li class="nav-item">
-                <i class="fa-solid fa-link"></i>
-                <%= link_to 'About', about_path %>
+                <%= link_to about_path do %>
+                  <i class="fa-solid fa-link"></i> About
+                <% end %>
               </li>
               <li class="nav-item">
-                <i class="fa-solid fa-user-plus"></i>
-                <%= link_to "Sign up", new_user_registration_path %>
+                <%= link_to new_user_registration_path do %>
+                  <i class="fa-solid fa-user-plus"></i> Sign up
+                <% end %>
               </li>
               <li class="nav-item">
-                <i class="fa-solid fa-right-to-bracket"></i>
-                <%= link_to "Log in", new_user_session_path %>
+                <%= link_to new_user_session_path do %>
+                  <i class="fa-solid fa-right-to-bracket"></i> Log in
+                <% end %>
               </li>
             <% end %>
           </ul>
@@ -88,43 +96,31 @@
   <!-- ここからサイドバー -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
-        <!-- ユーザー情報 -->
-        <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') %>
-          <div class="user-info">
-            <h3>User info</h3>
-            <!-- ログインしているユーザー情報を表示 -->
-            <%= image_tag current_user.get_profile_image(100, 100) %>
-            <div class="name-section">
-              <b>name</b><b><%= current_user.name %></b>
-            </div>
-            <div class="introduction-section">
-              <b>introduction</b><b> <%= current_user.introduction %></b>
-            </div>
-
-            <!-- 編集ボタン -->
-            <div class="edit-icon-button">
-              <%= link_to edit_user_path(current_user.id) do %>
+      <div class="col-md-3"> 
+        <% if user_signed_in? && (params[:controller] == 'users' || params[:controller] == 'books') && !(params[:action] == 'edit') %>
+        <!-- ユーザー情報（users/show 以外で表示） -->
+        <div class="user-info">
+          <h3>User info</h3>
+          <!-- 表示するユーザー情報を切り替え -->
+          <%= image_tag (@user.present? ? @user.get_profile_image(100, 100) : current_user.get_profile_image(100, 100)) %>
+          <div class="name-section">
+            <b>name</b><b><%= @user.present? ? @user.name : current_user.name %></b>
+          </div>
+          <div class="introduction-section">
+            <b>introduction</b><b> <%= @user.present? ? @user.introduction : current_user.introduction %></b>
+          </div>
+          <!-- 編集ボタン -->
+          <div class="edit-icon-button">
+            <% if current_user == @user || current_user != @user %> <!-- 編集リンクを常に表示 -->
+              <%= link_to edit_user_path(@user) do %>
                 <i class="fas fa-user-cog"></i>
               <% end %>
-            </div>
+            <% end %>
           </div>
-        <% end %>
-
+        </div>
         <!-- 作成画面 -->
-        <% if user_signed_in? && @new_book.present? %>
-        
+        <% if user_signed_in? && @new_book.present? && !(params[:action] == 'edit') %>
           <h2>New book</h2>
-          <% if @new_book.errors.any? %>
-            <div class="error-messages">
-              <h3><%= @new_book.errors.count %> errors prohibited this book from being saved:</h3>
-              <ul>
-                <% @new_book.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
           <%= form_with model: @new_book, local: true do |f| %>
             <div class="field">
               <%= f.label :title, class: @new_book.errors[:title].any? ? 'field_with_errors' : '' %><br>
@@ -140,11 +136,11 @@
             </div>
           <% end %>
         <% end %>
+        <% end %>
       </div>
       <!-- サイドバーここまで -->
-
       <!-- メインコンテンツ -->
-      <div class="col-lg-8">
+      <div class="col-md-8 offset-md-1"> 
         <%= yield %>
       </div>
     </div>

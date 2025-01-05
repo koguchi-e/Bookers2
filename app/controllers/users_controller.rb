@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @new_book = Book.new
     @books = @user.books.page(params[:page])
-    
+
     # 本がパラメータで指定されていればその本を取得
     if params[:book_id]
       @book = @user.books.find_by(id: params[:book_id])
@@ -21,13 +21,25 @@ class UsersController < ApplicationController
       # 本の詳細ページを表示したい場合のデフォルトの本を設定
       @book = @user.books.first # または他の適切なロジック
     end
+    
+    # 他の本（他のユーザーの本）を表示したい場合に対応
+    if params[:book_id] && params[:other_user_id]
+      @other_user = User.find(params[:other_user_id])
+      @other_book = @other_user.books.find_by(id: params[:book_id])
+    else
+      @other_book = nil
+    end
   end
-  
 
   # ユーザー編集ページ
   def edit
     @user = User.find(params[:id])
     @new_book = Book.new
+
+    # 自分以外のユーザーの編集ページにアクセスした場合、ログインユーザのページにリダイレクト
+    if @user != current_user
+      redirect_to user_path(current_user) 
+    end
   end
 
   # ユーザー更新
@@ -51,7 +63,7 @@ class UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to root_path, alert: "You are not authorized to access this page."
+      redirect_to user_path(current_user.id) 
     end
   end
 end
