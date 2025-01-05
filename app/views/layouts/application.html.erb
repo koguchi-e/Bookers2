@@ -113,6 +113,7 @@
 
         <!-- 作成画面 -->
         <% if user_signed_in? && @new_book.present? %>
+        
           <h2>New book</h2>
           <% if @new_book.errors.any? %>
             <div class="error-messages">
