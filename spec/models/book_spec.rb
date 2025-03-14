@@ -1,3 +1,4 @@
+# これはspec/rails_helper.rbを読み込んでいます。設定などを行うファイル
 require 'rails_helper'
 
 RSpec.describe 'Bookモデルのテスト', type: :model do
