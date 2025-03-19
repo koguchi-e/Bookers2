@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   }
 
   resources :users, only: [:index, :show, :edit, :update]
-  resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]  
+  resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]  do
+    resources :favorite, only: [:create, :destory]
+  end
 
   # Aboutページのルート設定
   get 'home/about', to: 'homes#about', as: 'about'
