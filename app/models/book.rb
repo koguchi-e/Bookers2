@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
 
-  def favaritede_by?(user)
+  def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
 end
