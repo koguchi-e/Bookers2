@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  has_many :reverse_of_relationships, class_name: "Relationship",
+  foreign_key: "followed_id", dependent: :destroy
+  
+
   def get_profile_image(width, height)
     if profile_image.attached?
       profile_image.variant(resize_to_limit: [width, height]).processed
