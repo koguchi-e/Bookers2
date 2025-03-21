@@ -105,10 +105,19 @@
           <!-- 表示するユーザー情報を切り替え -->
           <%= image_tag (@user.present? ? @user.get_profile_image(100, 100) : current_user.get_profile_image(100, 100)) %>
           <div class="name-section">
-            <b>name</b><b><%= @user.present? ? @user.name : current_user.name %></b>
+            <b>name</b>
+            <br>
+            <%= @user.present? ? @user.name : current_user.name %>
           </div>
+          <p></p>
           <div class="introduction-section">
-            <b>introduction</b><b> <%= @user.present? ? @user.introduction : current_user.introduction %></b>
+            <b>introduction</b>
+            <br>
+            <%= @user.present? ? @user.introduction : current_user.introduction %>
+            <p></p>
+            フォロー数：<%= @user.followings.count %>
+            <br>
+            フォロワー数：<%= @user.followers.count %>
           </div>
           <!-- 編集ボタン -->
           <div class="edit-icon-button">
