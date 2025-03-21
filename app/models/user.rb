@@ -13,12 +13,21 @@ class User < ApplicationRecord
   # 通知機能
   has_many :notifications, dependent: :destroy
 
-  # フォロー機能
+  ##########################################################
+
+  # フォローする側
+  # 中間テーブルへ
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # 中間テーブルを通して、フォローされる側テーブルへ
+  has_many :followings, through: :relationships, source: :followed
+
+  # フォローされる側
+  # 中間テーブルへ
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # 中間テーブルを通して、フォローする側テーブルへ
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followings, through: :relationships, source: :followed
+  ##########################################################
 
   validates :name, presence: true, length: { in: 2..20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
@@ -30,6 +39,8 @@ class User < ApplicationRecord
       'default_profile_image.png'
     end
   end
+
+  ##########################################################
 
   def follow(user)
     relationships.create(followed_id: user.id)
