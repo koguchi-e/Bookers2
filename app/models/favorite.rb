@@ -7,6 +7,6 @@ class Favorite < ApplicationRecord
     has_one :notification, as: :notifiable, dependent: :destroy
 
     after_create do
-        create_notigiacation(user_id: book.user_id)
+        create_notification(user_id: book.user_id)
     end
 end
