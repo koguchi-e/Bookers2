@@ -445,3 +445,10 @@ footer {
   background-color: darkgreen; /* ホバー時に緑が少し暗くなる */
   color: white !important;
 }
+
+// ##########################
+
+// 通知プルダウン変更
+.dropdown-menu .dropdown-item.custom-notification {
+  color: #4169e1!important;
+}
