@@ -7,8 +7,10 @@ class NotificationsController < ApplicationController
     case notification.notifiable_type
     when "Book"
       redirect_to book_path(notification.notifiable)
-    else
+    when "Favorite"
       redirect_to user_path(notification.notifiable.user)
+    when "Relationship"
+      redirect_to user_path(notification.notifiable.follower)
     end
   end
 end
