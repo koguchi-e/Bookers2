@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
 
+  resources :notifications, only: [:update]
+
   # Aboutページのルート設定
   get 'home/about', to: 'homes#about', as: 'about'
 end
