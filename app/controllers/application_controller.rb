@@ -4,33 +4,30 @@ class ApplicationController < ActionController::Base
   before_action :set_user, unless: -> { current_user.nil? }  # ログインしている場合のみセット
 
   protected
-    # メアドではなく、名前でログイン
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    end
 
-    # ログアウトしたら、ルートにリダイレクト
-    def after_sign_out_path_for(resource_or_scope)
-      root_path
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
 
-    # ログインしたら、ユーザページにリダイレクト
-    def after_sign_in_path_for(resource)
-      user_path(current_user)
-    end
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
 
-    # ログインしているユーザーは、ルートに入らず、ユーザーページにリダイレクト
-    def redirect_if_logged_in
-      if user_signed_in? && request.path == root_path
-        redirect_to user_path(current_user)
-      end
-    end
+  def after_sign_in_path_for(resource)
+    user_path(current_user)
+  end
 
-    def set_user
-      @user = current_user if user_signed_in?
+  def redirect_if_logged_in
+    if user_signed_in? && request.path == root_path
+      redirect_to user_path(current_user)
     end
+  end
 
-    def set_new_book
-      @new_book = Book.new
-    end
+  def set_user
+    @user = current_user if user_signed_in?
+  end
+
+  def set_new_book
+    @new_book = Book.new
+  end
 end
