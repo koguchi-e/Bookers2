@@ -8,5 +8,3 @@ module NotificationsHelper
   #   end
   # end
 end
-
-

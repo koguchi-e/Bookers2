@@ -15,7 +15,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id)
     else
       # バリデーションエラー情報を持った@bookを@new_bookとして利用
-      @new_book = @book  
+      @new_book = @book
       @books = Book.page(params[:page])  # ページネーション用
       render :index
     end
@@ -38,14 +38,14 @@ class BooksController < ApplicationController
     puts params[:id]  # params[:id] を確認
     @book = Book.find(params[:id])  # 本を取得
     if @book.user != current_user  # ユーザーが一致するかチェック
-      redirect_to books_path, alert: 'You are not authorized to edit this book.'
+      redirect_to books_path, alert: "You are not authorized to edit this book."
     end
   end
 
   def update
     @book = Book.find(params[:id])  # 編集対象の本を取得
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.'
+      redirect_to @book, notice: "Book was successfully updated."
     else
       render :edit
     end
@@ -54,21 +54,20 @@ class BooksController < ApplicationController
   # 本の削除
   def destroy
     @book = Book.find(params[:id])  # 削除対象の本を取得
-    
+
     # 投稿した本人でない場合は削除を許可しない
     unless @book.user == current_user
-      redirect_to books_path, alert: 'You are not authorized to delete this book.'
+      redirect_to books_path, alert: "You are not authorized to delete this book."
       return  # ユーザーが権限がない場合は、ここで終了
     end
 
     # ユーザーが許可された場合のみ削除を実行
     @book.destroy
-    redirect_to books_path, notice: 'Book was successfully deleted.'
+    redirect_to books_path, notice: "Book was successfully deleted."
   end
 
   private
-
-  def book_params
-    params.require(:book).permit(:title, :body)
-  end
+    def book_params
+      params.require(:book).permit(:title, :body)
+    end
 end

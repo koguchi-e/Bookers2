@@ -9,16 +9,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-
-  def configure_sign_up_params
-    # :email を追加
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])
-  end
-
-  def redirect_if_logged_in
-    # サインインしていない場合のみサインアップページを表示
-    if user_signed_in?
-      redirect_to user_path(current_user) # ログインしていればトップページにリダイレクト
+    def configure_sign_up_params
+      # :email を追加
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])
     end
-  end
+
+    def redirect_if_logged_in
+      # サインインしていない場合のみサインアップページを表示
+      if user_signed_in?
+        redirect_to user_path(current_user) # ログインしていればトップページにリダイレクト
+      end
+    end
 end
