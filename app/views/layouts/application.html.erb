@@ -43,6 +43,8 @@
                   <i class="fa-solid fa-book-open"></i> Books
                 <% end %>
               </li>
+
+              <!-- 通知欄 -->
               <li class="nav-item">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownmenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Notification
@@ -56,9 +58,10 @@
                     <% end %>
                   <% else %>
                     <span class="dropdown-item disabled text-secondary">未読の通知はありません</span>
-                  <% end %>                  
+                  <% end %>
                 </div>
               </li>
+              
               <li class="nav-item">
                 <%= link_to destroy_user_session_path, method: :delete do %>
                   <i class="fa-solid fa-right-from-bracket"></i> Log out
